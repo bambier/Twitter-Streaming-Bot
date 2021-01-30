@@ -2,7 +2,7 @@ import tweepy
 import authorization
 import sys
 from time import sleep
-from colorama import Fore as color
+
 import json
 
 
@@ -50,9 +50,9 @@ class Tweeter_Data_Streaming(tweepy.StreamListener):
 				file.write(DATA)
 
 		if user.lower() in self.friend:
-			print(color.LIGHTCYAN_EX + "User name:{0}\tAll:{1}\tUsers count:{2}\tTweets:{3}".format(user,self.hashtag_counts,len(self.attended_users),self.T) + color.RESET)
+			print("User name:{0}\tAll:{1}\tUsers count:{2}\tTweets:{3}".format(user,self.hashtag_counts,len(self.attended_users),self.T))
 		else:
-			print(color.GREEN + "User name:{0}\tAll:{1}\tUsers count:{2}\tTweets:{3}".format(user,self.hashtag_counts,len(self.attended_users),self.T) + color.RESET)
+			print("User name:{0}\tAll:{1}\tUsers count:{2}\tTweets:{3}".format(user,self.hashtag_counts,len(self.attended_users),self.T))
 		
 		
 		return True
@@ -61,17 +61,17 @@ class Tweeter_Data_Streaming(tweepy.StreamListener):
 		
 	
 	def on_error(self, error): # When raise error
-		print(color.LIGHTRED_EX + str(error) + color.RESET)
+		print(error)
 		sleep(5)
 		return False
 	
 	def on_timeout(self, time_out): # When connection timed out
-		print(color.LIGHTYELLOW_EX + str(time_out) + color.RESET)
+		print(time_out)
 		sleep(10)
 		return False
 	
 	def on_exception(self, get_exeption): #When other exeption hase raised
-		print(color.LIGHTCYAN_EX + str(get_exeption) + color.RESET)
+		print(get_exeption)
 		sleep(5)
 		return False
 
@@ -83,8 +83,9 @@ def help():
 	Use like this
 	python run.py {True/False (Optional)} Hashtag1 Hashtag2 ...
 	
-	python run.py Trump		Find all tweets wich contain #Trump and print them all
-	python run.py True Trump Find all tweets and just print last user id
+	python run.py Trump		//Find all tweets wich contain #Trump and print them all
+	python run.py True Trump 	Find all tweets and just print last user id
+	
 	
 	"""
 	print(HELP)
@@ -95,11 +96,11 @@ def help():
 
 if __name__ == "__main__":
 	FILTER = []
-	if sys.argv:
+	if sys.argv: # Get filters data from CMD, Terminal & etc.
 		if sys.argv[0] == "--help":
 			help()
 			sys.exit()
-		if sys.argv[0] == True:
+		if sys.argv[0] == True: #Live Update of Code
 			live = True
 		if sys.argv[1]:
 			for i in sys.argv[1:]:
@@ -113,7 +114,7 @@ if __name__ == "__main__":
 	listener = Tweeter_Data_Streaming() # Set up Steam listener
 	
 	auth = authorization.get_auth() # Get authorization
-	print(color.LIGHTMAGENTA_EX +"User\tNumber\tCount of attend\t Number of users\tTweets" + color.RESET)
+	print("User\tNumber\tCount of attend\t Number of users\tTweets")
 	
 	stream = tweepy.Stream(auth, listener) # Set up Streamer
 	stream.filter(track=FILTER) # Set up Stream filter
