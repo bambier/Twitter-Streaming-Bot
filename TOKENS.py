@@ -1,3 +1,4 @@
+# Set Your keys between 2 Cottation marks.
 API_Key = ""
 API_Key_Secret = ""
 
