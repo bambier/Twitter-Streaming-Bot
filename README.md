@@ -6,9 +6,9 @@ If you have not install Python on your system, Download python from https://pyth
 then add your tokens wich you get from twitter to TOKENS.py as how its informd in it.
 then copy commend blow and run it in your CMD/Terminal/etc
 
-pip install -r requipments.txt
+`pip install -r requipments.txt`
 
 if installation is successful then use this commend in your CMD/Terminal/etc
 
-python3 run.py [options(optimal)]
+`python3 run.py [options(optimal)]`
 
